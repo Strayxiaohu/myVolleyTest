@@ -1,5 +1,7 @@
 package com.xiaohu.myvolleytest.http;
 
+import java.util.Map;
+
 /**
  * Created by Administrator on 2016/7/20.
  */
@@ -10,6 +12,15 @@ public class HttpModel {
     private String passWord;
     private int timeOut;
     private String method;
+private Map<String,String> header;
+
+    public Map<String, String> getHeader() {
+        return header;
+    }
+
+    public void setHeader(Map<String, String> header) {
+        this.header = header;
+    }
 
     private boolean enableSSL;//http/https
     //计时器

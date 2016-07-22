@@ -1,6 +1,7 @@
 package com.xiaohu.myvolleytest.activity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +19,6 @@ import com.android.volley.toolbox.Volley;
 import com.xiaohu.myvolleytest.R;
 import com.xiaohu.myvolleytest.Service.HeartBeatService;
 import com.xiaohu.myvolleytest.http.GsonUtils;
-import com.xiaohu.myvolleytest.http.HttpHandler;
 import com.xiaohu.myvolleytest.http.HttpModel;
 import com.xiaohu.myvolleytest.http.HttpProxy;
 import com.xiaohu.myvolleytest.http.JsonModel;
@@ -50,6 +50,8 @@ public class LoginActivity extends Activity {
     }
 
     private void initEvent() {
+
+
         btnEsc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +85,7 @@ public class LoginActivity extends Activity {
         btnEsc = (Button) findViewById(R.id.btn_esc);
         btnYan = (Button) findViewById(R.id.btn_yanzheng);
         btnSui = (Button) findViewById(R.id.btn_suiji);
+
     }
 
     private void LogoutMethod() {
@@ -149,18 +152,20 @@ public class LoginActivity extends Activity {
             public void onResponse(String response) {
                 System.out.println("验证：" + response);
                 JsonModel model1 = GsonUtils.analysisJson(response, "");
-                if (isTrue) {
+
                     if (model1.getSuccess().equals("true")) {
                         //在线不需要重新登录
                         Toast.makeText(LoginActivity.this, "在线", Toast.LENGTH_SHORT).show();
                     } else {
-                        SuiJiMethod(true);
+                        if (isTrue) {
+                            SuiJiMethod(true);
+                        }
                         System.out.println("验证失败");
                         Toast.makeText(LoginActivity.this, "不在线", Toast.LENGTH_SHORT).show();
                     }
 
 
-                }
+
             }
         }, new Response.ErrorListener() {
 
@@ -184,7 +189,7 @@ public class LoginActivity extends Activity {
                 editor.putString("RandomNumber", model1.getRandomNumber());
                 editor.commit();
                 System.out.println("RandomNumber::" + response);
-                Toast.makeText(LoginActivity.this, "RandomNumber::"+model1.getRandomNumber(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "RandomNumber::" + model1.getRandomNumber(), Toast.LENGTH_SHORT).show();
                 //重新登录
                 if (isTrue) {
                     loginMethod();
@@ -197,7 +202,10 @@ public class LoginActivity extends Activity {
                 System.out.println(error.getMessage());
             }
         });
+
     }
+
+
 
     private void loginMethod() {
 
@@ -218,6 +226,7 @@ public class LoginActivity extends Activity {
                 if (model.getSuccess().equals("true")) {
                     Intent intent = new Intent(LoginActivity.this, HeartBeatService.class);
                     startService(intent);
+
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
