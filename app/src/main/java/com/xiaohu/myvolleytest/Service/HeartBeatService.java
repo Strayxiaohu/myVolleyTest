@@ -31,10 +31,8 @@ public class HeartBeatService extends Service {
         super.onCreate();
         queue = Volley.newRequestQueue(this);
          receiver = new MyReceiver();
-
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.intent.action.MY_BROADCAST");
-
         registerReceiver(receiver, filter);
         new Thread(runnable).start();
             handler = new Handler() {
