@@ -101,21 +101,19 @@ public class HeartBeatService extends Service {
                 Intent intent=new Intent("android.intent.action.MY_BROADCAST");
                 intent.putExtra("msg",model1.getSuccess());
                 sendBroadcast(intent);
-                if(model1.getSuccess().equals("false")){
-                    handler.removeCallbacks(runnable);
-                    unregisterReceiver(receiver);
-                }
+
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         System.out.println(error.getMessage());
-                        Intent intent=new Intent("android.intent.action.MY_BROADCAST");
-                        intent.putExtra("msg","false");
+                        Intent intent = new Intent("android.intent.action.MY_BROADCAST");
+                        intent.putExtra("msg", "false");
                         sendBroadcast(intent);
-                        handler.removeCallbacks(runnable);
-                        unregisterReceiver(receiver);
+                        //这样做，等接受到广播的时候，不能跳到登录页面
+                        //handler.removeCallbacks(runnable);
+                       //unregisterReceiver(receiver);
                     }
                 });
     }

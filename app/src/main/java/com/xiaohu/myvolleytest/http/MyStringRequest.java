@@ -37,6 +37,7 @@ Map<String,String> myHeaders=null;
         sharedPreferences = context.getSharedPreferences("APPROVAL", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
+
     public MyStringRequest(Context context,int method,String url,Map<String,String> map, Response.Listener<String> listener, Response.ErrorListener errorListener){
         super(method,url,listener,errorListener);
         myHeaders=map;
@@ -84,11 +85,12 @@ Map<String,String> myHeaders=null;
 //                    }
 //                    headers.put("Cookie", builder.toString());
 //                }
-        System.out.println(";;;;;;;;" + sid);
-        if(myHeaders!=null){
-            headers=myHeaders;
-        }
-        headers.put("Charset","UTF-8");
+       // System.out.println(";;;;;;;;" + sid);
+       // if(myHeaders!=null){
+      //      headers=myHeaders;
+      //  }
+        headers.put("Content-Type", "application/json; charset=utf-8");
+       // headers.put("Charset","UTF-8");
         headers.put("Cookie", sid);
 
         return headers;

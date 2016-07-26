@@ -44,7 +44,15 @@ public class HttpProxy {
         //String url="http://192.168.1.113:62020/Service/User.aspx?Action=Online";
         MyStringRequest myStringRequest = new MyStringRequest(context,Request.Method.POST,url,header, listener, errorListener);
         //超时时间
-        myStringRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+        myStringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(myStringRequest);
+    }
+    public HttpProxy(RequestQueue queue, String url, Context context, Response.Listener<String>listener, Response.ErrorListener errorListener){
+        MyStringRequest myStringRequest = new MyStringRequest(context,Request.Method.GET,url,listener, errorListener);
+        //超时时间
+        myStringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(myStringRequest);

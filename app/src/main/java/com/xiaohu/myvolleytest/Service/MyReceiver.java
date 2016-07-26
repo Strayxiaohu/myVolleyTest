@@ -21,6 +21,8 @@ public class MyReceiver extends BroadcastReceiver{
             //intent.setAction("android.intent.category.LAUNCHER");
            // intent.addCategory("android.intent.action.MAIN");
             context.startActivity(intenLogin);
+            Intent intent1=new Intent(context,HeartBeatService.class);
+            context.stopService(intent1);
         }
     }
 }

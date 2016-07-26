@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.WebViewActivity"/>
         <service android:name=".Service.HeartBeatService"/>
     </application>
 

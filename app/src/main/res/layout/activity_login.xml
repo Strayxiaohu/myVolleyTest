@@ -3,6 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_webservice"
+        android:text="webview"/>
+    <Button
         android:id="@+id/btn_suiji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,6 +22,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="验证在线"/>
+    <Button
+        android:id="@+id/btn_getCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取字典"/>
     <Button
         android:id="@+id/btn_esc"
         android:layout_width="wrap_content"
